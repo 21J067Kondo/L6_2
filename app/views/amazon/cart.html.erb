@@ -1,0 +1,18 @@
+<h1>cart</h1>
+<div class="item">
+<% cart=Cart.where(uid: session[:cart_id]) %>
+<% count=0 %>
+<% @products.each do |c| %>
+<% if cart.where(pid: c.id).count!=0 %>
+商品<%= c.name %>
+数量<%= cart.where(pid: c.id).count %>
+価格<%= c.price %>円 
+<% count+=c.price*cart.where(pid: c.id).count %>
+<%= button_to 'カートから削除','cdel',{method: :post,params: {pid: c.id}} %>
+</div>
+<% end %>
+<% end %>
+
+<p>合計金額
+<%= count %>円
+</p>

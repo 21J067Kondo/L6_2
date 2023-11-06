@@ -5,10 +5,10 @@
 <%= p.price %>円
 </p>
 <%= button_to '商品削除','delete',{method: :post,params: {pid: p.id}} %>
-<%= button_to '商品削除','cin',{method: :get,params: {pid: p.id}} %>
+<%= button_to 'カートに商品追加','cin',{method: :get,params: {pid: p.id}} %>
 </div>
 <% end %>
 
 <br>
 <%= link_to '商品を追加する', 'add' %>
-<%= link_to 'カートを確認する', 'look' %>
+<%= link_to 'カートを確認する', 'cart' %>

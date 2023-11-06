@@ -2,14 +2,21 @@ class AmazonController < ApplicationController
     def index
         @products=Product.all
         if session[:cart_id]==nil
-            c=Cart.new
-            c.save
-            session[:cart_id]=c.id
+            c=Cart.all
+            puts '-------------'
+            if c.maximum(:uid)==nil
+                c=0
+            else
+                c=c.maximum(:uid)+1
+            end
+            session[:cart_id]=c
         end
     end
     
     def delete
         Product.find(params[:pid]).destroy
+        Cart.where(pid: params[:pid]).destroy_all
+        
         redirect_to '/'
     end
     
@@ -21,18 +28,20 @@ class AmazonController < ApplicationController
     def cartin
         if params[:count].to_i!=0 
         for f in 1..params[:count].to_i do
-            a=Cart.new(pid: params[:pid].to_i)
-            
+            a=Cart.new(uid: session[:cart_id],pid: params[:pid].to_i)
+            a.save
         end
         end
+        redirect_to '/'
     end
     
     def cart
-        cart=Cart.where(id: session[:cart_id])
-        ps=Product.all
-        ps.each do |p|
-            puts p.id
-        end
+        @products=Product.all
     end
-    
+   
+   def cdel
+       cart=Cart.where(uid: session[:cart_id])
+       cart.where(pid: params[:pid]).destroy_all
+       redirect_to '/'
+   end
 end
