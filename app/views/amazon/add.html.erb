@@ -1,0 +1,8 @@
+<h1>add</h1>
+<%= form_tag '/amazon/regist', method: :post, data: { turbo: false } do %>
+    <%= label_tag :name, '商品名' %>
+    <%= text_field_tag :name %><br>
+    <%= label_tag :price, '価格' %>
+    <%= text_field_tag :price %><br>
+    <%= submit_tag '登録' %>
+<% end %>

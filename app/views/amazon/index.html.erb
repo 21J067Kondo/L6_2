@@ -1,0 +1,14 @@
+<h1>top</h1>
+<% @products.each do |p| %>
+<div class="item">
+<p><%= p.name %>
+<%= p.price %>円
+</p>
+<%= button_to '商品削除','delete',{method: :post,params: {pid: p.id}} %>
+<%= button_to '商品削除','cin',{method: :get,params: {pid: p.id}} %>
+</div>
+<% end %>
+
+<br>
+<%= link_to '商品を追加する', 'add' %>
+<%= link_to 'カートを確認する', 'look' %>

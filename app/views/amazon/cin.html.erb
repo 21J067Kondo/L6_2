@@ -1,0 +1,10 @@
+<h1>Cin</h1>
+<%= form_tag '/amazon/cartin', method: :post, data: { turbo: false } do %>
+    <%= Product.find(params[:pid]).name %>
+    <%= Product.find(params[:pid]).price %>円
+    <br>
+    <%= label_tag :count, '数量' %>
+    <%= hidden_field_tag :pid, params[:pid] %>
+    <%= number_field_tag :count ,0,min:0, max:10 %><br>
+    <%= submit_tag '登録' %>
+<% end %>
